@@ -145,9 +145,9 @@ http://localhost:5000/api/newTranslation
 ```json
 {
   "name": "string upto 500 chars",
-  "value": "massive text value"
+  "value": "massive text value",
   "filename": "filename up to 250 chars",
-  "language": "filename up to 250 chars",
+  "language": "filename up to 250 chars"
 }
 ```
 Don't worry if this doesn't reflect on the table, it's only a mock api and as such won't be adding / removing items from the arrays.
