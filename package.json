@@ -9,6 +9,7 @@
     "fake-server": "json-server --watch db.json --port 5000 --middlewares ./middleware.js"
   },
   "dependencies": {
+    "axios": "^0.19.0",
     "concurrently": "^3.5.1",
     "vue": "^2.5.13"
   },

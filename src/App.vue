@@ -1,28 +1,61 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <div class="columns">
+      <div class="column">
+        <div class="hero hero-sm bg-dark">
+          <h1>Translate Helper</h1>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="columns">
+        <div class="column col-3">
+          <language-list></language-list>
+        </div>
+      </div>
+      <div class="columns table-section">
+        <div class="column col-10 p-centered">
+          <translation-details></translation-details>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import LanguageList from "./components/LanguageList";
+import TranslationDetails from "./components/TranslationDetails";
 
 export default {
-  name: 'app',
+  name: "app",
   components: {
-    HelloWorld
+    LanguageList,
+    TranslationDetails
   }
-}
+};
 </script>
 
 <style>
+@import url("https://unpkg.com/spectre.css/dist/spectre.min.css");
+@import url("https://unpkg.com/spectre.css/dist/spectre-exp.min.css");
+@import url("https://unpkg.com/spectre.css/dist/spectre-icons.min.css");
+
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+}
+
+.hero {
+  text-align: center;
+}
+
+.container {
+  margin-top: 32px;
+}
+
+.table-section {
+  margin-top: 16px
 }
 </style>
