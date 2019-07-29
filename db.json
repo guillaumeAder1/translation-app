@@ -30619,9 +30619,9 @@
     }
   ],
   "newTranslation": {
-    "property": "string upto 500 chars",
+    "name": "string upto 500 chars",
+    "value": "massive text value",
     "filename": "filename up to 250 chars",
-    "language": "filename up to 250 chars",
-    "textvalue": "massive text value"
+    "language": "filename up to 250 chars"
   }
 }
