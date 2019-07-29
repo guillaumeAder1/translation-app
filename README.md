@@ -4,7 +4,7 @@
 
 + Sucessfully `GET` the full listing of language [`en`, `ga`, `no`].
 + Implement a language switcher dropdown.
-+ Get the available translations for the selected languages and display it via a table -> `GET`.
++ Get the available translations for the selected languages and display it via a table (or another alternative its up to you) -> `GET`.
 + Enable the table to be editable for translation strings -> `POST`.
 + Display feedback for a user upon sucess/error for a translation -> `POST Feedback`.
 + Surpirse us! At VSWare we value creativity, so throw a little something extra into the pot.
