@@ -21,6 +21,7 @@ export default {
   methods: {
     onLangSwitch() {
       localStorage.setItem('langCode', this.selected);
+      //TODO: Optimize the component to component communication for better performance
       this.$root.$emit("languageSwitch", this.selected);
     }
   },
