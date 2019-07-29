@@ -1,10 +1,5 @@
 # Vsware FrontEnd Interview
 
-## Dependancies
-
-+ [Docker](https://docs.docker.com/install/)
-+ [docker-compose](https://docs.docker.com/compose/install/)
-
 ## Core Task's
 
 + Sucessfully `GET` the full listing of language [`en`, `ga`, `no`].
@@ -22,12 +17,9 @@
 
 ## Setup
 
-Ensure you have docker installed
+`npm install`
 
-```bash
-docker-compose build
-docker-compose up
-```
+`npm start`
 
 ### Client
 
