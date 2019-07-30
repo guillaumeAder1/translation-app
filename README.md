@@ -4,12 +4,15 @@ The main aim of this application is to allow users across the world to be able t
 for the international application. The available languages are listed below. You must design and 
 implement a UI that will allow users to easily manage the translation of languages.
 
+To get started please create a branch or fork this repo with your name as the branch name. 
+
 ## Core Task's
 
 + `GET` the full listing of language codes [`en`, `ga`, `no`].
 + Implement a language switcher dropdown to select which language you want to work on.
 + Get the available translations for the selected language and display it 
   via a table (or another alternative its up to you) -> `GET`.
++ Show keys with missing translations for each language
 + Provide a means of editing and saving a translation in the table -> `POST`.
 + Display feedback for a user upon success/error for a translation -> `POST`.
 
@@ -76,7 +79,7 @@ http://localhost:5000/api/en
 [
   {
     "en": {
-      "name": "some_key",
+      "key": "some_key",
       "value": "dc test pop remove",
       "file": "messages_en.properties",
       "id": 6855413
@@ -88,13 +91,13 @@ In this example we can see it has a norweigan translation but no english transla
 ```json
 {
   "en": {
-    "name": "attendance.markteachinggroup.saveforothersessionsheader",
+    "key": "attendance.markteachinggroup.saveforothersessionsheader",
     "value": "",
     "file": "messages_en.properties",
     "id": 41406
   },
   "no": {
-    "name": "attendance.markteachinggroup.saveforothersessionsheader",
+    "key": "attendance.markteachinggroup.saveforothersessionsheader",
     "value": "Save for other sessions",
     "file": null,
     "id": 68709
@@ -109,13 +112,13 @@ missing and must be added
 ```json
 {
   "en": {
-    "name": "attendance.markteachinggroup.saveforothersessionsheader",
+    "key": "attendance.markteachinggroup.saveforothersessionsheader",
     "value": "",
     "file": "messages_en.properties",
     "id": 41406
   },
   "no": {
-    "name": "attendance.markteachinggroup.saveforothersessionsheader",
+    "key": "attendance.markteachinggroup.saveforothersessionsheader",
     "value": "",
     "file": null,
     "id": 68709
@@ -131,7 +134,7 @@ http://localhost:5000/api/newTranslation
 
 ```json
 {
-  "name": "string upto 500 chars",
+  "key": "string upto 500 chars",
   "value": "massive text value",
   "filename": "filename up to 250 chars",
   "language": "filename up to 250 chars"
@@ -144,7 +147,7 @@ http://localhost:5000/api/newTranslation
 
 ```json
 {
-  "name": "string upto 500 chars",
+  "key": "string upto 500 chars",
   "value": "massive text value",
   "filename": "filename up to 250 chars",
   "language": "filename up to 250 chars"
