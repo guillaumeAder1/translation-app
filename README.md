@@ -12,7 +12,7 @@ To get started please create a branch or fork this repo with your name as the br
 + Implement a language switcher dropdown to select which language you want to work on.
 + Get the available translations for the selected language and display it 
   via a table (or another alternative its up to you) -> `GET`.
-+ Show keys with missing translations for each language
++ If a translation is missing in either english or the selected language we need a way to update this --> `POST`.
 + Provide a means of editing and saving a translation in the table -> `POST`.
 + Display feedback for a user upon success/error for a translation -> `POST`.
 
