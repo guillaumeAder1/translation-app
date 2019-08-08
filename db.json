@@ -30619,9 +30619,9 @@
     }
   ],
   "newTranslation": {
-    "property": "common.go",
-    "filename": "messages_no.properties",
-    "language": "no",
-    "textvalue": "ss"
+    "key": "asdasdsa",
+    "value": "Flintstone",
+    "filename": "file name",
+    "language": "language"
   }
 }
