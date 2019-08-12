@@ -4,8 +4,12 @@
       <DropDown @onSelected="langSelected"/>
     </div>
     <div class="content">
-      <ListContainer :language="selectedLang" @translationSelected="selectTranslation" />
-      <TranslateContainer :translation="selectedTranslation" :language="selectedLang"/>
+      <ListContainer 
+        :language="selectedLang" 
+        @translationSelected="selectTranslation" />
+      <TranslateContainer 
+        :translation="selectedTranslation" 
+        :language="selectedLang"/>
     </div>
   </div>
 </template>

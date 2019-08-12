@@ -1,8 +1,11 @@
 <template>
   <div class="list-container" v-if="language" >
     <div>Selected Language: {{ language.language }}</div>
-   
-      <div v-for="item in translations" :key="item.id" @click="selectTranslation(item)" :class="[item.translationMissing ? ' missing list' : 'list']">
+      <div 
+        v-for="item in translations" 
+        :key="item.id" 
+        @click="selectTranslation(item)" 
+        :class="[item.translationMissing ? ' missing list' : 'list']">
         {{ item.title }}
         <br>
         translation is missing: {{ item.translationMissing }}
@@ -12,6 +15,7 @@
 
 <script>
 import axios from 'axios'
+import formatObject from './utils'
 export default {
   props: {
     language: {
@@ -32,6 +36,7 @@ export default {
           return {
             ...item,
             title: item[Object.keys(item)[0]].key,
+            fileName: item[Object.keys(item)[0]].file,
             translationMissing: this.isMissing(item)
           } /// find missing is wrong
         })

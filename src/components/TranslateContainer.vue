@@ -62,7 +62,7 @@ export default {
       this.postUpdate(value, this.getkey(this.translation))
     },
     getKey(data) {
-      return Object.keys(data).map(element => element.key)[0]
+      console.log(Object.keys(data).map(element => element.key)[0])
     },
     getFilename(data, lang) {
       return Object.keys(data).map(element => element.file)[0].replace(/(_en.|_no.|_ga.)/, `_${lang}.`)

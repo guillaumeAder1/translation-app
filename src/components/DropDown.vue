@@ -18,7 +18,7 @@ export default {
     try {
       const response = await axios.get('http://localhost:5000/api/codes');
       // improvment: could be good to select a default value
-      this.languages = response.data
+      this.languages = response.data.filter(item => item.language !== null)
     } catch (error) {
       console.error(error);
     }
