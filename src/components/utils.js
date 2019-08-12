@@ -35,19 +35,25 @@ const t3 = {
 
 const flattenTranslation = (obj) => {
   const asArray = Object.keys(obj)
+
   const flatten = asArray.map(value => {
     return {
       // ...obj[value],
-      key: obj[value].key,
-      value: obj[value].value,
-      filename: obj[value].file,
-      language: value
+      key: obj[value].key || '',
+      value: obj[value].value || '',
+      filename: obj[value].file || '',
+      language: value || ''
     }
   })
   return flatten
 }
 
-const formatObject = (obj) => {
+const formatObject = (obj, toLang) => {
+  // handle edge case where only one key
+  // need to handle when 'en' key is missing
+  if (!obj.hasOwnProperty(toLang)) {
+    obj[toLang] = {}
+  }
   const _key = findKeyValue(obj, 'key')
   const _file = findKeyValue(obj, 'file')
   const newObj = {
@@ -66,21 +72,21 @@ const findKeyValue = (obj, key) => {
   return (values.length && obj[values[0]][key]) || ''
 }
 
-formatObject(t3)
-
-
 const hasTranslationMissing = (obj) => {
   const missingKey = Object.keys(obj).length !== 2 
-  const valueIsEmpty = Object.keys(obj).filter(element => obj[element].value === "").length
+  const valueIsEmpty = Object.keys(obj).filter(element => obj[element].value).length
   const missing = !!missingKey || !!valueIsEmpty
   return missing
 }
 
-// console.log(formatObject(t))
-// const getFileValue = (obj) => {
-//   const values = Object.keys(obj).filter(element => {
-//     return obj[element] && obj[element].file != null
-//   })
-//   return (values.length && obj[values[0]].file) || ''
-// }
-// getFileValue(t2)
+formatObject(t3, 'no')
+
+hasTranslationMissing(t3)
+
+/**
+ * TODO
+ * handle en to en transaltion
+ * verify only one key in obj
+ * en key is missing in obj...
+ * 
+ */
