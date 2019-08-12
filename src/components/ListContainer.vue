@@ -15,7 +15,7 @@
 
 <script>
 import axios from 'axios'
-import formatObject from './utils'
+import { formatObject } from './utils'
 export default {
   props: {
     language: {
@@ -32,14 +32,14 @@ export default {
   computed: { 
     translations() {
       return this.list.slice(this.sliceStart, this.sliceStart + this.sliceSize)
-        .map(item=> {
-          return {
-            ...item,
-            title: item[Object.keys(item)[0]].key,
-            fileName: item[Object.keys(item)[0]].file,
-            translationMissing: this.isMissing(item)
-          } /// find missing is wrong
-        })
+        // .map(item=> {
+        //   return {
+        //     ...item,
+        //     title: item[Object.keys(item)[0]].key,
+        //     fileName: item[Object.keys(item)[0]].file,
+        //     translationMissing: this.isMissing(item)
+        //   } /// find missing is wrong
+        // })
     }
   },
   watch: {
@@ -65,7 +65,7 @@ export default {
     async fetchTranslation (val) {
       try{
         const response = await axios.get(`http://localhost:5000/api/${val}`);
-        this.list = response.data
+        this.list = response.data.map(item => formatObject(item))
       } catch (err) {
         console.warn(err)
       }

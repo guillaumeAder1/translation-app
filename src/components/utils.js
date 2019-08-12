@@ -13,6 +13,25 @@ const t = {
     "id": 65878
   }
 }
+
+const t2 = {
+  "en": {},
+  "ga": {
+    "key": "common.go",
+    "value": "go",
+    "file": "messages_en.properties",
+    "id": 6816105
+  }
+}
+
+const t3 = {
+  "en": {
+    "key": "0",
+    "value": "dc test pop remove",
+    "file": "messages_en.properties",
+    "id": 6855413
+  }
+}
 // const isTranslationMissing = (obj) => {
 //   const lang = []
 //   const asArray = Object.keys(obj)
@@ -42,9 +61,11 @@ const flattenTranslation = (obj) => {
 
 export const formatObject = (obj) => {
   const asArray = Object.keys(obj)
+  const _key = obj[asArray[0]] && obj[asArray[0]].key
+  const _file = obj[asArray[0]].file !== null ? obj[asArray[0]].file : ''
   const newObj = {
-    key: obj[asArray[0]].key,
-    filename: obj[asArray[0]].file.replace(/_en.|_no.|_ga./, '(0)'),
+    key: _key,
+    filename: _file.replace(/_en.|_no.|_ga./, '(0)'),
     missTranslation: hasTranslationMissing(obj),
     translations: flattenTranslation(obj)
   }
