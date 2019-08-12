@@ -32,46 +32,41 @@ const t3 = {
     "id": 6855413
   }
 }
-// const isTranslationMissing = (obj) => {
-//   const lang = []
-//   const asArray = Object.keys(obj)
-//   for (var i in asArray) {
-//     lang.push(
-//       {
-//         key: obj[asArray[i]].key,
-//         value: obj[asArray[i]].value,
-//         file: obj[asArray[i]].file,
-//         id: obj[asArray[i]].id
-//       }
-//     )
-//   }
-//   return lang
-// }
 
 const flattenTranslation = (obj) => {
   const asArray = Object.keys(obj)
   const flatten = asArray.map(value => {
     return {
-      ...obj[value],
+      // ...obj[value],
+      key: obj[value].key,
+      value: obj[value].value,
+      filename: obj[value].file,
       language: value
     }
   })
   return flatten
 }
 
-export const formatObject = (obj) => {
-  const asArray = Object.keys(obj)
-  const _key = obj[asArray[0]] && obj[asArray[0]].key
-  const _file = obj[asArray[0]].file !== null ? obj[asArray[0]].file : ''
+const formatObject = (obj) => {
+  const _key = findKeyValue(obj, 'key')
+  const _file = findKeyValue(obj, 'file')
   const newObj = {
     key: _key,
-    filename: _file.replace(/_en.|_no.|_ga./, '(0)'),
+    filename: _file.replace(/_en.|_no.|_ga./, '(0)'), // can be used as a template string if one 'file' field is missing...
     missTranslation: hasTranslationMissing(obj),
     translations: flattenTranslation(obj)
   }
   return newObj
 }
 
+const findKeyValue = (obj, key) => {
+  const values = Object.keys(obj).filter(element => {
+    return obj[element] && obj[element][key] != null
+  })
+  return (values.length && obj[values[0]][key]) || ''
+}
+
+formatObject(t3)
 
 
 const hasTranslationMissing = (obj) => {
@@ -82,3 +77,10 @@ const hasTranslationMissing = (obj) => {
 }
 
 // console.log(formatObject(t))
+// const getFileValue = (obj) => {
+//   const values = Object.keys(obj).filter(element => {
+//     return obj[element] && obj[element].file != null
+//   })
+//   return (values.length && obj[values[0]].file) || ''
+// }
+// getFileValue(t2)
