@@ -108,12 +108,19 @@ export default {
   background: rgb(211, 249, 211);
 }
 #app div.message.error {
-  background: rgb(250, 198, 198);
+  background: rgb(201, 164, 164);
 }
 #app div.form *{
   vertical-align: middle;
 }
 #app input[type="text"] {
   padding: 10px;
+}
+
+#app input[type='radio'], #app label{   
+  line-height: 18px;
+}
+#app .filter-options{
+  flex: 0;
 }
 </style>

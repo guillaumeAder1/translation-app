@@ -1,8 +1,16 @@
 <template>
   <div class="list-container border" v-if="language" >
+
     <input type="text" v-model="search" placeholder="search by key..."/>
+    <div class="filter-options">
+      <div v-for="option in filterOptions" :key="option">
+        <input type="radio" :id="option" :value="option" v-model="filter">
+        <label :for="option">{{ option }}</label>
+      </div>
+    </div>
+
     <div 
-      v-for="item in searchByKey" 
+      v-for="item in filtered" 
       :key="item.key" 
       @click="selectTranslation(item)" 
       :class="[item.missTranslation ? 'missing list' : 'list']">
@@ -26,7 +34,13 @@ export default {
       list: [],
       sliceStart: 0,
       sliceSize: 10,
-      search: ''
+      search: '',
+      filterOptions: [
+        'all',
+        'missing',
+        'completed'
+      ],
+      filter: 'all'
     }
   },
   computed: { 
@@ -35,6 +49,12 @@ export default {
     },
     searchByKey() {
       return this.translations.filter(element => element.key.includes(this.search))
+    },
+    filtered() {
+      const value = this.filter
+      if(value === 'all') { return this.searchByKey }
+      return this.searchByKey.filter(element =>  value === 'missing' ? element.missTranslation : !element.missTranslation)
+
     }
   },
   watch: {

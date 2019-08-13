@@ -1,6 +1,8 @@
 <template>
   <div class="header">
     <select @change="select" v-model="selected">
+      <option disabled selected value="">Please select a language</option>
+
       <option 
         v-for="lang in languages" 
         :key="lang.id" 
@@ -18,7 +20,7 @@ export default {
   data () {
     return {
       languages: null,
-      selected: {}
+      selected: ''
     }
   },
   async mounted() {
