@@ -87,10 +87,16 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
 }
+#app ul{
+  list-style-type: none;
+  padding: initial;
+}
 #app .list{
+  padding: 10px 0;
   overflow-wrap: break-word;
   word-wrap: break-word;
   hyphens: auto;
+  cursor: pointer;
   flex: 0 0 30px;
   border-bottom: 1px solid lightgrey;
 }

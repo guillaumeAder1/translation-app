@@ -8,15 +8,15 @@
         <label :for="option">{{ option }}</label>
       </div>
     </div>
-
-    <div 
-      v-for="item in filtered" 
-      :key="item.key" 
-      @click="selectTranslation(item)" 
-      :class="[item.missTranslation ? 'missing list' : 'list']">
-      {{ item.key }}
-      <br>
-    </div>
+    <ul>
+      <li
+        v-for="item in filtered" 
+        :key="item.key" 
+        @click="selectTranslation(item)" 
+        :class="[item.missTranslation ? 'missing list' : 'list']">
+        {{ item.key }}
+        </li>
+    </ul>
   </div>
 </template>
 
