@@ -1,13 +1,14 @@
 <template>
   <div class="list-container" v-if="language" >
-      <div 
-        v-for="item in translations" 
-        :key="item.key" 
-        @click="selectTranslation(item)" 
-        :class="[item.missTranslation ? 'missing list' : 'list']">
-        {{ item.key }}
-        <br>
-      </div>
+    <input type="text" v-model="search" placeholder="search by key..."/>
+    <div 
+      v-for="item in searchByKey" 
+      :key="item.key" 
+      @click="selectTranslation(item)" 
+      :class="[item.missTranslation ? 'missing list' : 'list']">
+      {{ item.key }}
+      <br>
+    </div>
   </div>
 </template>
 
@@ -24,12 +25,16 @@ export default {
     return {
       list: [],
       sliceStart: 0,
-      sliceSize: 10
+      sliceSize: 10,
+      search: ''
     }
   },
   computed: { 
     translations() {
       return this.list.slice(this.sliceStart, this.sliceStart + this.sliceSize)
+    },
+    searchByKey() {
+      return this.translations.filter(element => element.key.includes(this.search))
     }
   },
   watch: {
@@ -44,8 +49,16 @@ export default {
       try{
         const response = await axios.get(`http://localhost:5000/api/${val}`);
         this.list = response.data.map(item => formatObject(item, val))
-      } catch (err) {
-        console.warn(err)
+         this.$emit('onCallback', {
+          'status': 'ok',
+          'message': 'translations found'
+        })
+      } catch (error) {
+        console.warn(error)
+         this.$emit('onCallback', {
+          'status': 'error',
+          'message': error.message
+        })
       }
     },
     selectTranslation (translation) {

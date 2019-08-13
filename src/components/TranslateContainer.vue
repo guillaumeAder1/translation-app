@@ -39,9 +39,16 @@ export default {
           url: 'http://localhost:5000/api/newTranslation',
           data: translation
         });
-        console.log(response)
+        this.$emit('onCallback', {
+          'status': 'ok',
+          'message': 'translation posted'
+        })
       } catch (error) {
         console.warn(error)
+         this.$emit('onCallback', {
+          'status': 'error',
+          'message': error.message
+        })
       }
     }
   }

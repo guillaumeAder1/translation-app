@@ -1,12 +1,19 @@
 <template>
   <div id="app">
-    <DropDown @onSelected="langSelected"/>
+    <DropDown 
+      @onSelected="langSelected"
+      @onCallback="displayMessage"/>
     <div class="content">
       <ListContainer 
         :language="selectedLang" 
-        @translationSelected="selectTranslation" />
+        @translationSelected="selectTranslation"
+        @onCallback="displayMessage" />
       <TranslateContainer 
-        :curTranslation="selectedTranslation" />
+        :curTranslation="selectedTranslation" 
+        @onCallback="displayMessage"/>
+    </div>
+    <div v-if="callbackMessage" :class="`message ${callbackMessage.status}`">
+      {{callbackMessage.message}}
     </div>
   </div>
 </template>
@@ -26,7 +33,8 @@ export default {
   data() {
     return {
       selectedLang: null,
-      selectedTranslation: null
+      selectedTranslation: null,
+      callbackMessage: ''
     }
   },
   methods: {
@@ -35,6 +43,9 @@ export default {
     },
     selectTranslation (translation) {
       this.selectedTranslation = translation
+    },
+    displayMessage(msg) {
+      this.callbackMessage = msg
     }
   }
 };
@@ -65,13 +76,26 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
 }
-.list{
+#app .list{
   overflow-wrap: break-word;
   word-wrap: break-word;
   hyphens: auto;
+  flex: 0 0 30px;
 }
 #app div.block{
   flex: none;
   display: block;
 } 
+#app div.message{
+  padding: 20px;
+  position: absolute;
+  top:10px;
+  right: 10px;
+}
+#app div.message.ok {
+  background: rgb(211, 249, 211);
+}
+#app div.message.error {
+  background: rgb(250, 198, 198);
+}
 </style>

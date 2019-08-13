@@ -21,8 +21,16 @@ export default {
       const response = await axios.get('http://localhost:5000/api/codes');
       // improvment: could be good to select a default value
       this.languages = response.data.filter(item => item.language !== null)
+      this.$emit('onCallback', {
+        'status': 'ok',
+        'message': 'codes found'
+      })
     } catch (error) {
       console.error(error);
+      this.$emit('onCallback', {
+        'status': 'error',
+        'message': error.message
+      })
     }
   },
   methods: {
