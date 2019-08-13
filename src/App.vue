@@ -1,15 +1,15 @@
 <template>
   <div id="app">
     <div class="header">
-      <DropDown @onSelected="langSelected"/>
+      <DropDown 
+        @onSelected="langSelected"/>
     </div>
     <div class="content">
       <ListContainer 
         :language="selectedLang" 
         @translationSelected="selectTranslation" />
       <TranslateContainer 
-        :curTranslation="selectedTranslation" 
-        :language="selectedLang"/>
+        :curTranslation="selectedTranslation" />
     </div>
   </div>
 </template>
@@ -45,15 +45,11 @@ export default {
 
 <style>
 #app div {
-  /* border :1px solid grey; */
   padding: 5px;
   margin: 5px;
   flex: 1;
   display: flex;
 }
-/* #app div.content:first-child{
-  flex: 0 0 200px;
-} */
 #app div .translate-container{
   display: flex;
   flex-direction: column
