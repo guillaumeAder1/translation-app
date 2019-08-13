@@ -33,39 +33,46 @@ const t3 = {
   }
 }
 
-const flattenTranslation = (obj) => {
+// flatten obj and use placeholder value if keys are undefined
+const flattenTranslation = (obj, key, file) => {
   const asArray = Object.keys(obj)
-
-  const flatten = asArray.map(value => {
+  const flatten = asArray.map(lang => {
     return {
-      // ...obj[value],
-      key: obj[value].key || '',
-      value: obj[value].value || '',
-      filename: obj[value].file || '',
-      language: value || ''
+      key: obj[lang].key || key,
+      value: obj[lang].value || '',
+      filename: file.replace(/_en.|_no.|_ga./, `_${lang}.`), // force correct filename
+      language: lang
     }
   })
   return flatten
 }
 
-export const formatObject = (obj, toLang) => {
-  // handle edge case where only one key
-  // need to handle when 'en' key is missing
-  const _key = findKeyValue(obj, 'key')
-  const _file = findKeyValue(obj, 'file')
-  if (!obj.hasOwnProperty(toLang)) {
-    obj[toLang] = {
-      key: _key,
-      value: '',
-      file: _file,
-      id: ''
+// make sure object received has correct structure and key not missing 'keys'
+// also need to handle 'en' edge case (only one key expected)
+const normalizeObj = (obj, lang) => {
+  const list = lang === 'en' ? ['en'] : ['en', lang]
+  for (let i in list) {
+    if (!obj.hasOwnProperty(list[i])){
+      obj[list[i]] = {
+        key: '',
+        value: '',
+        filename: '',
+        language: list[i]
+      }
     }
   }
+}
+export const formatObject = (obj, toLang) => {
+  normalizeObj(obj, toLang)
+  // find correct keys and filename values... 
+  const _key = findKeyValue(obj, 'key')
+  const _file = findKeyValue(obj, 'file')
+  const validObject = flattenTranslation(obj, _key, _file) 
   const newObj = {
-    key: _key,
-    filename: _file.replace(/_en.|_no.|_ga./, '(0)'), // can be used as a template string if one 'file' field is missing...
-    missTranslation: hasTranslationMissing(obj),
-    translations: flattenTranslation(obj)
+    key: _key, // use for display and filtering
+    filename: _file, // can be used for filtering, optional...
+    missTranslation: hasTranslationMissing(validObject), // helper for filtering, optional
+    translations: validObject // used for component
   }
   return newObj
 }
@@ -78,10 +85,8 @@ const findKeyValue = (obj, key) => {
 }
 
 const hasTranslationMissing = (obj) => {
-  const missingKey = Object.keys(obj).length !== 2 
   const valueIsEmpty = Object.keys(obj).filter(element => obj[element].value === '').length
-  const missing = !!missingKey || !!valueIsEmpty
-  return missing
+  return !!valueIsEmpty
 }
 
 formatObject(t3, 'no')
