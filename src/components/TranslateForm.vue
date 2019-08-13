@@ -1,7 +1,7 @@
 <template>
-  <div class="block">
+  <div class="form block">
     <b>{{ translation.language }}: </b>
-    <input type="text" v-model="model"/>
+    <textarea rows="5" cols="50" v-model="model"/>
     <button @click="updateValue">update</button>
   </div>
 </template>

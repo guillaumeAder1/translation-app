@@ -22,6 +22,7 @@
 import DropDown from './components/DropDown'
 import ListContainer from './components/ListContainer'
 import TranslateContainer from './components/TranslateContainer'
+import { setTimeout } from 'timers';
 
 export default {
   name: "app",
@@ -44,8 +45,13 @@ export default {
     selectTranslation (translation) {
       this.selectedTranslation = translation
     },
+    // methods used for status messaging from components
+    // couble be replace by a Vuex state for better maintenance with deep component tree
     displayMessage(msg) {
-      this.callbackMessage = msg
+      this.callbackMessage = ''
+      setTimeout(() => {
+        this.callbackMessage = msg
+      }, 500)
     }
   }
 };
@@ -69,7 +75,7 @@ export default {
 
 #app .border{
   border: 1px solid grey;
-  padding: 10px;
+  padding: 20px;
 }
 
 #app {
@@ -103,5 +109,11 @@ export default {
 }
 #app div.message.error {
   background: rgb(250, 198, 198);
+}
+#app div.form *{
+  vertical-align: middle;
+}
+#app input[type="text"] {
+  padding: 10px;
 }
 </style>
