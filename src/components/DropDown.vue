@@ -1,7 +1,9 @@
 <template>
-  <select @change="select" v-model="selected">
-    <option v-for="lang in languages" :key="lang.id" :value="lang" >{{ lang.language }}</option>
-  </select>
+  <div class="header">
+    <select @change="select" v-model="selected">
+      <option v-for="lang in languages" :key="lang.id" :value="lang" >{{ lang.language }}</option>
+    </select>
+  </div>
 </template>
 
 <script>

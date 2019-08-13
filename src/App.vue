@@ -1,9 +1,6 @@
 <template>
   <div id="app">
-    <div class="header">
-      <DropDown 
-        @onSelected="langSelected"/>
-    </div>
+    <DropDown @onSelected="langSelected"/>
     <div class="content">
       <ListContainer 
         :language="selectedLang" 

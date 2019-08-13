@@ -10,7 +10,7 @@
       <br>
       <code 
         v-for="(data, index) in curTranslation.translations" 
-        :key="data.key +  index + 'code'">
+        :key="data.key + index + 'code'">
         {{data}}
       </code>
       <br/>
