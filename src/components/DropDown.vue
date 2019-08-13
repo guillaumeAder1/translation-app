@@ -1,7 +1,12 @@
 <template>
   <div class="header">
     <select @change="select" v-model="selected">
-      <option v-for="lang in languages" :key="lang.id" :value="lang" >{{ lang.language }}</option>
+      <option 
+        v-for="lang in languages" 
+        :key="lang.id" 
+        :value="lang" >
+        {{ lang.language }}
+      </option>
     </select>
   </div>
 </template>
@@ -19,7 +24,6 @@ export default {
   async mounted() {
     try {
       const response = await axios.get('http://localhost:5000/api/codes');
-      // improvment: could be good to select a default value
       this.languages = response.data.filter(item => item.language !== null)
       this.$emit('onCallback', {
         'status': 'ok',

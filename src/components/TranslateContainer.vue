@@ -1,6 +1,7 @@
 <template>
-  <div v-if="curTranslation" class="translate-container">
-    {{curTranslation.key}}
+  <div v-if="curTranslation" class="translate-container ">
+    <h3>{{curTranslation.key}}</h3>
+    <h4>{{curTranslation.filename}}</h4>
     <template>
       <TranslateForm
         v-for="(data, index) in curTranslation.translations" 

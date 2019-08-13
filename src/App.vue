@@ -67,6 +67,11 @@ export default {
   flex: 0 0 100px;
 }
 
+#app .border{
+  border: 1px solid grey;
+  padding: 10px;
+}
+
 #app {
   height: 90vh;
   flex-direction: column;
@@ -81,6 +86,7 @@ export default {
   word-wrap: break-word;
   hyphens: auto;
   flex: 0 0 30px;
+  border-bottom: 1px solid lightgrey;
 }
 #app div.block{
   flex: none;

@@ -1,5 +1,5 @@
 <template>
-  <div class="list-container" v-if="language" >
+  <div class="list-container border" v-if="language" >
     <input type="text" v-model="search" placeholder="search by key..."/>
     <div 
       v-for="item in searchByKey" 
