@@ -1,38 +1,4 @@
 
-const t = {
-  "en": {
-    "key": "attendance.markteachinggroup.saveforothersessions",
-    "value": "",
-    "file": "messages_en.properties",
-    "id": 41405
-  },
-  "no": {
-    "key": "attendance.markteachinggroup.saveforothersessions",
-    "value": "Klassen har flere timer idag. Vil du føre fravær for disse også?",
-    "file": "messages_no.properties",
-    "id": 65878
-  }
-}
-
-const t2 = {
-  "en": {},
-  "ga": {
-    "key": "common.go",
-    "value": "go",
-    "file": "messages_en.properties",
-    "id": 6816105
-  }
-}
-
-const t3 = {
-  "en": {
-    "key": "0",
-    "value": "dc test pop remove",
-    "file": "messages_en.properties",
-    "id": 6855413
-  }
-}
-
 // flatten obj and use placeholder value if keys are undefined
 const flattenTranslation = (obj, key, file) => {
   const asArray = Object.keys(obj)
@@ -67,36 +33,24 @@ export const formatObject = (obj, toLang) => {
   // find correct keys and filename values... 
   const _key = findKeyValue(obj, 'key')
   const _file = findKeyValue(obj, 'file')
-  const validObject = flattenTranslation(obj, _key, _file) 
+  const validTranslation = flattenTranslation(obj, _key, _file) 
   const newObj = {
     key: _key, // use for display and filtering
     filename: _file, // can be used for filtering, optional...
     missTranslation: hasTranslationMissing(validObject), // helper for filtering, optional
-    translations: validObject // used for component
+    translations: validTranslation // used for component
   }
   return newObj
 }
-
+// fetch value of specified Key whithin Obj
 const findKeyValue = (obj, key) => {
   const values = Object.keys(obj).filter(element => {
     return obj[element] && obj[element][key] != null
   })
   return (values.length && obj[values[0]][key]) || ''
 }
-
+// check if one value field is empty string
 const hasTranslationMissing = (obj) => {
   const valueIsEmpty = Object.keys(obj).filter(element => obj[element].value === '').length
   return !!valueIsEmpty
 }
-
-formatObject(t3, 'no')
-
-hasTranslationMissing(t3)
-
-/**
- * TODO
- * handle en to en transaltion
- * verify only one key in obj
- * en key is missing in obj...
- * 
- */
