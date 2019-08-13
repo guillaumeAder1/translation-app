@@ -38,7 +38,7 @@ export const formatObject = (obj, toLang) => {
   const validTranslation = flattenTranslation(obj, _key, _file) 
   const newObj = {
     key: _key, // use for display and filtering
-    filename: _file, // can be used for filtering, optional...
+    filename: _file, // can be used for filtering, optional
     missTranslation: hasTranslationMissing(validTranslation), // helper for filtering, optional
     translations: validTranslation // used for component
   }
