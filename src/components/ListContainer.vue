@@ -3,12 +3,12 @@
     <div>Selected Language: {{ language.language }}</div>
       <div 
         v-for="item in translations" 
-        :key="item.id" 
+        :key="item.key" 
         @click="selectTranslation(item)" 
         :class="[item.translationMissing ? ' missing list' : 'list']">
-        {{ item.title }}
+        {{ item.key }}
         <br>
-        translation is missing: {{ item.translationMissing }}
+        translation is missing: {{ item.missTranslation }}
       </div>
   </div>
 </template>
@@ -65,7 +65,7 @@ export default {
     async fetchTranslation (val) {
       try{
         const response = await axios.get(`http://localhost:5000/api/${val}`);
-        this.list = response.data.map(item => formatObject(item))
+        this.list = response.data.map(item => formatObject(item, val))
       } catch (err) {
         console.warn(err)
       }

@@ -1,52 +1,33 @@
 <template>
-  <div v-if="translation" class="translate-container">
-    <span>EN</span> 
-    <input 
-      @blur="updateField('en', field1)" 
-      type="text" 
-      v-model="field1"  
-      />
-    <span>{{ getLanguage.toUpperCase() }}</span>
-    <input 
-      @blur="updateField(getLanguage, field2)" 
-      type="text" 
-      v-model="field2" />
-    <br>
-    <br>
-    <br>
-    EN
-    <code>{{ translation.en }}</code>
-    {{ this.language.language.toUpperCase() }}
-    <code>{{ translation[this.language.language] || 'null'  }}</code>
+  <div v-if="curTranslation" class="translate-container">
+    <template>
+      <TranslateForm
+        v-for="(data, index) in curTranslation.translations" 
+        :key="data.key + index"  
+        :translation="data" 
+        @onUpdate="postUpdate"/>
+    </template>
   </div>
 </template>
 
 <script>
 import axios from 'axios'
+import TranslateForm from './TranslateForm'
 export default {
+  components: {
+    TranslateForm
+  },
   props: {
-    translation: {
+    curTranslation: {
       type: Object
     },
     language: {
       type: Object
     }
   },
-  data() {
-    return {
-     _field1: '',
-     _field2: ''
-    }
-  },
   computed: {
     getLanguage() {
       return this.language.language
-    },
-    field1() {
-      return this.getValue(this.translation, 'en')
-      }, 
-    field2() {
-      return this.getValue(this.translation, this.getLanguage)
     }
   },
   methods: {
@@ -67,20 +48,20 @@ export default {
     getFilename(data, lang) {
       return Object.keys(data).map(element => element.file)[0].replace(/(_en.|_no.|_ga.)/, `_${lang}.`)
     },
-    async postUpdate (value, key, language) {
-      const data = {
-        key: key,
-        value: value,
-        filename: this.getFilename(this.translation, language),
-        language: language
+    hasChanged (newValue) {
+      console.log(newValue)
+    },
+    async postUpdate (translation) {
+      try {
+        const response = await axios({
+          method: 'post',
+          url: 'http://localhost:5000/api/newTranslation',
+          data: translation
+        });
+        console.log(response)
+      } catch (error) {
+        console.warn(error)
       }
-      console.log(data)
-      const response = await axios({
-        method: 'post',
-        url: 'http://localhost:5000/api/newTranslation',
-        data: data
-      });
-      console.log(response)
     }
   }
 }

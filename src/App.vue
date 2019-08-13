@@ -8,7 +8,7 @@
         :language="selectedLang" 
         @translationSelected="selectTranslation" />
       <TranslateContainer 
-        :translation="selectedTranslation" 
+        :curTranslation="selectedTranslation" 
         :language="selectedLang"/>
     </div>
   </div>
@@ -77,4 +77,8 @@ export default {
   word-wrap: break-word;
   hyphens: auto;
 }
+#app div.block{
+  flex: none;
+  display: block;
+} 
 </style>

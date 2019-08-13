@@ -48,14 +48,19 @@ const flattenTranslation = (obj) => {
   return flatten
 }
 
-const formatObject = (obj, toLang) => {
+export const formatObject = (obj, toLang) => {
   // handle edge case where only one key
   // need to handle when 'en' key is missing
-  if (!obj.hasOwnProperty(toLang)) {
-    obj[toLang] = {}
-  }
   const _key = findKeyValue(obj, 'key')
   const _file = findKeyValue(obj, 'file')
+  if (!obj.hasOwnProperty(toLang)) {
+    obj[toLang] = {
+      key: _key,
+      value: '',
+      file: _file,
+      id: ''
+    }
+  }
   const newObj = {
     key: _key,
     filename: _file.replace(/_en.|_no.|_ga./, '(0)'), // can be used as a template string if one 'file' field is missing...
@@ -74,7 +79,7 @@ const findKeyValue = (obj, key) => {
 
 const hasTranslationMissing = (obj) => {
   const missingKey = Object.keys(obj).length !== 2 
-  const valueIsEmpty = Object.keys(obj).filter(element => obj[element].value).length
+  const valueIsEmpty = Object.keys(obj).filter(element => obj[element].value === '').length
   const missing = !!missingKey || !!valueIsEmpty
   return missing
 }
