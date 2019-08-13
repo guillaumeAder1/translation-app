@@ -14,7 +14,6 @@
 </template>
 
 <script>
-// TODO , remove last element of reponse, emnpty value... not needed
 import axios from 'axios'
 export default {
   data () {

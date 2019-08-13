@@ -29,18 +29,17 @@ const normalizeObj = (obj, lang) => {
   }
 }
 // clean and re-arrange data structure,
-// and try to map to component props
+// to be mapped to component props
 export const formatObject = (obj, toLang) => {
   normalizeObj(obj, toLang)
-  // find correct keys and filename values... 
   const _key = findKeyValue(obj, 'key')
   const _file = findKeyValue(obj, 'file')
   const validTranslation = flattenTranslation(obj, _key, _file) 
   const newObj = {
-    key: _key, // use for display and filtering
-    filename: _file, // can be used for filtering, optional
-    missTranslation: hasTranslationMissing(validTranslation), // helper for filtering, optional
-    translations: validTranslation // used for component
+    key: _key, // String, used for display and filtering
+    filename: _file, // String, can be used for filtering, optional
+    missTranslation: hasTranslationMissing(validTranslation), // Boolean, helper for filtering, optional
+    translations: validTranslation // used for component, should be an Array
   }
   return newObj
 }

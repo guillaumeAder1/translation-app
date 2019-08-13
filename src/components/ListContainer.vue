@@ -33,7 +33,7 @@ export default {
     return {
       list: [],
       sliceStart: 0,
-      sliceSize: 10,
+      sliceSize: 15,
       search: '',
       filterOptions: [
         'all',
@@ -54,7 +54,6 @@ export default {
       const value = this.filter
       if(value === 'all') { return this.searchByKey }
       return this.searchByKey.filter(element =>  value === 'missing' ? element.missTranslation : !element.missTranslation)
-
     }
   },
   watch: {
@@ -69,7 +68,7 @@ export default {
       try{
         const response = await axios.get(`http://localhost:5000/api/${val}`);
         this.list = response.data.map(item => formatObject(item, val))
-         this.$emit('onCallback', {
+        this.$emit('onCallback', {
           'status': 'ok',
           'message': 'translations found'
         })
