@@ -22,7 +22,7 @@
 
 <script>
 import axios from 'axios'
-import { formatObject } from './utils'
+import { formatObject } from '../helpers/utils'
 export default {
   props: {
     language: {
